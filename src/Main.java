@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -6,25 +8,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        File file = new File("C:\\Users\\samue\\OneDrive\\Documentos\\Java Projects\\names.txt");
+        String path = "C:\\Users\\samue\\OneDrive\\Documentos\\Java Projects\\names.txt";
 
-        Scanner sc = null;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
 
-        try {
+            String line = bufferedReader.readLine();
 
-            sc = new Scanner(file);
-
-            while (sc.hasNextLine()) {
-                System.out.println(sc.nextLine());
+            while (line != null) {
+                System.out.println(line);
+                line = bufferedReader.readLine();
             }
-
 
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
-        } finally {
-            if (sc != null) {
-                sc.close();
-            }
         }
     }
 
